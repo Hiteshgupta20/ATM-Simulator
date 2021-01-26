@@ -17,21 +17,22 @@ public class Signup extends JFrame implements ActionListener {
     //Random Number For Application Number
     Random ran= new Random();
     long first4=(ran.nextLong() % 9000L)+1000L;
-    long first=Math.abs(first4);
+    String first=""+Math.abs(first4);
     
     Signup(){
     	
     	//Set the title to center
 		
-		setFont(new Font("System",Font.BOLD,22));
+    	setFont(new Font("System",Font.BOLD,22));
 		Font f=getFont();
 		FontMetrics fm=getFontMetrics(f);
-		int x=fm.stringWidth("New Account Application form");
-		int y=fm.stringWidth("");
+		int x=fm.stringWidth("New Application Form - Page 1");
+		int y=fm.stringWidth(" ");
 		int z=getWidth()-x;
 		int w=z/y;
 		String pad="";
-		setTitle(pad+"New Account Application form");
+		pad=String.format("%"+w+"s", pad);
+		setTitle(pad+"New Application Form - Page 1");
 		
 		//Labels
 		l1 = new JLabel("APPLICATION FORM NO. "+first);
@@ -136,6 +137,7 @@ public class Signup extends JFrame implements ActionListener {
         groupstatus.add(r3);
         groupstatus.add(r4);
         groupstatus.add(r5);
+        
         
         String Date[] = {"1","2","3","4","5","6","7","8","9"};
         c1=new JComboBox(Date);
@@ -280,7 +282,7 @@ public class Signup extends JFrame implements ActionListener {
     			String q1="insert into signup values('"+a+"','"+b+"','"+ac+"','"+bc+"','"+cc+"','"+d+"','"+e+"','"+f+"','"+g+"','"+h+"','"+i+"','"+j+"','"+first+"')";
     			c1.s.executeUpdate(q1);
     			
-    			new Signup2().setVisible(true);
+    			new Signup2(first).setVisible(true);
     			setVisible(false);
     		}
     		}
@@ -289,7 +291,7 @@ public class Signup extends JFrame implements ActionListener {
 		}
     	
     	}
-    public void main (String[] args) {
+    public static void main (String[] args) {
     	new Signup().setVisible(true);
     }
 	
