@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 public class Deposit extends JFrame implements ActionListener {
 	JTextField t1,t2;
@@ -120,6 +121,8 @@ public class Deposit extends JFrame implements ActionListener {
 	 new Deposit().setVisible(true);
  }
 =======
+=======
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 public class Deposit {
 	public static void main(String[] args) {
 		new Deposit().setVisible(true);
@@ -129,6 +132,9 @@ public class Deposit {
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
+=======
 >>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 
 }

@@ -127,8 +127,13 @@ public class Signup3 extends JFrame implements ActionListener {
         add(l11);
         
 <<<<<<< HEAD
+<<<<<<< HEAD
       //  l12.setBounds(770,10,40,30);
         //add(l12);
+=======
+        l12.setBounds(770,10,40,30);
+        add(l12);
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 =======
         l12.setBounds(770,10,40,30);
         add(l12);
@@ -275,7 +280,11 @@ public class Signup3 extends JFrame implements ActionListener {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			public static void main (String[] args) {
+=======
+			public void main (String[] args) {
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 =======
 			public void main (String[] args) {
 >>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914

@@ -118,11 +118,17 @@ public class Signup extends JFrame implements ActionListener {
         r2.setBackground(Color.WHITE);
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
         ButtonGroup groupgender = new ButtonGroup();
         groupgender.add(r1);
         groupgender.add(r2);
         
+<<<<<<< HEAD
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
+=======
 >>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
         r3 = new JRadioButton("Married");
         r3.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -137,12 +143,18 @@ public class Signup extends JFrame implements ActionListener {
         r5.setBackground(Color.WHITE);
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
         ButtonGroup groupstatus = new ButtonGroup();
         groupstatus.add(r3);
         groupstatus.add(r4);
         groupstatus.add(r5);
         
+<<<<<<< HEAD
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
+=======
 >>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
         
         String Date[] = {"1","2","3","4","5","6","7","8","9"};

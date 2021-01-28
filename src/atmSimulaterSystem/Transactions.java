@@ -1,5 +1,6 @@
 package atmSimulaterSystem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -128,6 +129,8 @@ public class Transactions extends JFrame implements ActionListener {
 	 }
 	
 =======
+=======
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 
 public class Transactions {
 
@@ -135,6 +138,9 @@ public class Transactions {
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
+>>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
+=======
 >>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
 
 }
