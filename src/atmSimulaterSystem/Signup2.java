@@ -5,33 +5,31 @@ import javax.swing.*;
 import java.sql.*;
 
 public class Signup2 extends JFrame implements ActionListener{
-	JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;
-	JButton b;
-	JRadioButton r1,r2,r3,r4;
-	JTextField t1,t2,t3,t4;
-	JComboBox c1,c2,c3,c4,c5;
-	String formno;
-	
-	Signup2(String formno){
-		
-		 this.formno = formno;
-		setFont(new Font("System",Font.BOLD,22));
-		Font f=getFont();
-		FontMetrics fm=getFontMetrics(f);
-		int x=fm.stringWidth("New Application Form - Page 2");
-		int y=fm.stringWidth(" ");
-		int z=getWidth()-x;
-		int w=z/y;
-		String pad="";
-		pad=String.format("%"+w+"s", pad);
-		setTitle(pad+"New Application Form - Page 2");
-		
-		//Labels
-		l1 = new JLabel("Page 2: Additional Details");
-		l1.setFont(new Font("Raleway",Font.BOLD, 22));
-		
-		l2 = new JLabel("Religion:");
-	    l2.setFont(new Font("Raleway", Font.BOLD, 18));
+    
+    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;
+    JButton b;
+    JRadioButton r1,r2,r3,r4;
+    JTextField t1,t2,t3;
+    JComboBox c1,c2,c3,c4,c5;
+    String formno;
+    Signup2(String formno){
+        
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("atmSimulaterSystem/icons/logo.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l14 = new JLabel(i3);
+        l14.setBounds(150, 0, 100, 100);
+        add(l14);
+        
+        
+        this.formno = formno;
+        setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 2");
+        
+        l1 = new JLabel("Page 2: Additonal Details");
+        l1.setFont(new Font("Raleway", Font.BOLD, 22));
+        
+        l2 = new JLabel("Religion:");
+        l2.setFont(new Font("Raleway", Font.BOLD, 18));
         
         l3 = new JLabel("Category:");
         l3.setFont(new Font("Raleway", Font.BOLD, 18));
@@ -41,7 +39,10 @@ public class Signup2 extends JFrame implements ActionListener{
         
         l5 = new JLabel("Educational");
         l5.setFont(new Font("Raleway", Font.BOLD, 18));
-		
+        
+        l11 = new JLabel("Qualification:");
+        l11.setFont(new Font("Raleway", Font.BOLD, 18));
+        
         l6 = new JLabel("Occupation:");
         l6.setFont(new Font("Raleway", Font.BOLD, 18));
         
@@ -57,30 +58,23 @@ public class Signup2 extends JFrame implements ActionListener{
         l10 = new JLabel("Existing Account:");
         l10.setFont(new Font("Raleway", Font.BOLD, 18));
         
-        l11 = new JLabel("Qualification:");
-        l11.setFont(new Font("Raleway", Font.BOLD, 18));
-        
         l12 = new JLabel("Form No:");
         l12.setFont(new Font("Raleway", Font.BOLD, 13));
         
         l13 = new JLabel(formno);
         l13.setFont(new Font("Raleway", Font.BOLD, 13));
         
-        //Button
-        
         b = new JButton("Next");
         b.setFont(new Font("Raleway", Font.BOLD, 14));
         b.setBackground(Color.BLACK);
         b.setForeground(Color.WHITE);
         
-        //textfields
         t1 = new JTextField();
         t1.setFont(new Font("Raleway", Font.BOLD, 14));
         
         t2 = new JTextField();
         t2.setFont(new Font("Raleway", Font.BOLD, 14));
         
-        //Radio Buttons
         r1 = new JRadioButton("Yes");
         r1.setFont(new Font("Raleway", Font.BOLD, 14));
         r1.setBackground(Color.WHITE);
@@ -97,7 +91,7 @@ public class Signup2 extends JFrame implements ActionListener{
         r4.setFont(new Font("Raleway", Font.BOLD, 14));
         r4.setBackground(Color.WHITE);
         
-        //Combo Box
+        
         String religion[] = {"Hindu","Muslim","Sikh","Christian","Other"};
         c1 = new JComboBox(religion);
         c1.setBackground(Color.WHITE);
@@ -122,10 +116,10 @@ public class Signup2 extends JFrame implements ActionListener{
         c5 = new JComboBox(occupation);
         c5.setBackground(Color.WHITE);
         c5.setFont(new Font("Raleway", Font.BOLD, 14));
-
+       
+        
         setLayout(null);
         
-        //Setting layouts 
         
         l12.setBounds(700,10,60,30);
         add(l12);
@@ -207,58 +201,58 @@ public class Signup2 extends JFrame implements ActionListener{
         getContentPane().setBackground(Color.WHITE);
         
         setSize(850,750);
-        setLocation(500,120);
+        setLocation(100,0);
         setVisible(true);
-	}
-        /**
-         *
-         */
-        public void actionPerformed(ActionEvent ae) {
-        	String a=(String)c1.getSelectedItem();
-        	String b=(String)c2.getSelectedItem();
-        	String c=(String)c3.getSelectedItem();
-        	String d=(String)c4.getSelectedItem();
-        	String e=(String)c5.getSelectedItem();
-        	
-        	String f=t1.getText();
-        	String g=t2.getText();
-        	
-        	String h="";
-        	if(r1.isSelected())
-        		h="Yes";
-        	else if(r2.isSelected())
-        		h="No";
-        	
-        	String i="";
-        	if(r3.isSelected())
-        		i="Yes";
-        	else if(r4.isSelected())
-        		i="No";
-        	
-        	String j=t3.getText();
-        	
-        	try {
-        		if(t2.getText().equals("")) 
-        			JOptionPane.showMessageDialog(null, "Fill All the Required Fileds");
-        		else {
-        			Conn c1= new Conn();
-        			String q1= "insert into signup2 values('"+a+"','"+b+"','"+c+"','"+d+"','"+e+"','"+f+"','"+g+"','"+h+"','"+i+"')";
-        			c1.s.executeUpdate(q1);
-        			
-        			new Signup3().setVisible(true);
-        			setVisible(false);
-        		}
-        	}catch (Exception ex) {
-				ex.printStackTrace();
-			}
-        }
-        public static void main(String[] args) {
-        	new Signup2("").setVisible(true);
-       
-        
     }
+    
+    public void actionPerformed(ActionEvent ae){
+        String religion = (String)c1.getSelectedItem(); 
+        String category = (String)c2.getSelectedItem();
+        String income = (String)c3.getSelectedItem();
+        String education = (String)c4.getSelectedItem();
+        String occupation = (String)c5.getSelectedItem();
         
-	}
-	
-
-
+        String pan = t1.getText();
+        String aadhar = t2.getText();
+        
+        String scitizen = "";
+        if(r1.isSelected()){ 
+            scitizen = "Yes";
+        }
+        else if(r2.isSelected()){ 
+            scitizen = "No";
+        }
+           
+        String eaccount = "";
+        if(r3.isSelected()){ 
+            eaccount = "Yes";
+        }else if(r4.isSelected()){ 
+            eaccount = "No";
+        }
+        
+        try{
+            if(t2.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Fill all the required fields");
+            }else{
+                Conn c1 = new Conn();
+                String q1 = "insert into signup2 values('"+formno+"','"+religion+"','"+category+"','"+income+"','"+education+"','"+occupation+"','"+pan+"','"+aadhar+"','"+scitizen+"','"+eaccount+"')";
+                c1.s.executeUpdate(q1);
+                
+                new Signup3(formno).setVisible(true);
+                setVisible(false);
+            }
+                
+      
+            
+        }catch(Exception ex){
+             ex.printStackTrace();
+        }
+    
+               
+    }
+    
+    
+    public static void main(String[] args){
+        new Signup2("").setVisible(true);
+    }
+}

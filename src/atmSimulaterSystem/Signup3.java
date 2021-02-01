@@ -5,29 +5,25 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.*;
 
-public class Signup3 extends JFrame implements ActionListener {
-	JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;	
-	JButton b1,b2;
-	JRadioButton r1,r2,r3,r4;
-	JTextField t1;
-	JCheckBox c1,c2,c3,c4,c5,c6,c7;
-	
-	Signup3(){
-		
-		//Move Title to Center
-		setFont(new Font("System",Font.BOLD,22));
-		Font f=getFont();
-		FontMetrics fm=getFontMetrics(f);
-		int x=fm.stringWidth("Account Details - Page 3");
-		int y=fm.stringWidth(" ");
-		int z=getWidth()-x;
-		int w=z/y;
-		String pad="";
-		pad=String.format("%"+w+"s", pad);
-		setTitle(pad+"Account Details - Page 3");
-		
-		//labels
-		l1 = new JLabel("Page 3: Account Details");
+public class Signup3 extends JFrame implements ActionListener{
+    
+    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12;
+    JRadioButton r1,r2,r3,r4;
+    JButton b1,b2;
+    JCheckBox c1,c2,c3,c4,c5,c6;
+    String formno;
+    Signup3(String formno){
+        this.formno = formno;
+        setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 3");
+    
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("atmSimulaterSystem/icons/logo.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l14 = new JLabel(i3);
+        l14.setBounds(150, 0, 100, 100);
+        add(l14);
+        
+        l1 = new JLabel("Page 3: Account Details");
         l1.setFont(new Font("Raleway", Font.BOLD, 22));
         
         l2 = new JLabel("Account Type:");
@@ -60,7 +56,9 @@ public class Signup3 extends JFrame implements ActionListener {
         l11 = new JLabel("Form No:");
         l11.setFont(new Font("Raleway", Font.BOLD, 14));
         
-        //Buttons
+        l12 = new JLabel(formno);
+        l12.setFont(new Font("Raleway", Font.BOLD, 14));
+        
         b1 = new JButton("Submit");
         b1.setFont(new Font("Raleway", Font.BOLD, 14));
         b1.setBackground(Color.BLACK);
@@ -96,11 +94,7 @@ public class Signup3 extends JFrame implements ActionListener {
         c6.setBackground(Color.WHITE);
         c6.setFont(new Font("Raleway", Font.BOLD, 16));
         
-        c7 = new JCheckBox("I hereby declares that the above entered details correct to th best of my knowledge.",true);
-        c7.setBackground(Color.WHITE);
-        c7.setFont(new Font("Raleway", Font.BOLD, 12));
-         
-        //radio buttons
+                
         r1 = new JRadioButton("Saving Account");
         r1.setFont(new Font("Raleway", Font.BOLD, 16));
         r1.setBackground(Color.WHITE);
@@ -117,27 +111,19 @@ public class Signup3 extends JFrame implements ActionListener {
         r4.setFont(new Font("Raleway", Font.BOLD, 16));
         r4.setBackground(Color.WHITE);
         
-        t1=new JTextField();
-        t1.setFont(new Font("Raleway",Font.BOLD,12));
-
+        ButtonGroup groupgender = new ButtonGroup();
+        groupgender.add(r1);
+        groupgender.add(r2);
+        groupgender.add(r3);
+        groupgender.add(r4);
+        
         setLayout(null);
         
-        //Setting layouts
         l11.setBounds(700,10,70,30);
         add(l11);
         
-<<<<<<< HEAD
-<<<<<<< HEAD
-      //  l12.setBounds(770,10,40,30);
-        //add(l12);
-=======
         l12.setBounds(770,10,40,30);
         add(l12);
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-=======
-        l12.setBounds(770,10,40,30);
-        add(l12);
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
         
         l1.setBounds(280,40,400,40);
         add(l1); 
@@ -199,98 +185,94 @@ public class Signup3 extends JFrame implements ActionListener {
         c6.setBounds(350,600,200,30);
         add(c6);
         
-        c7.setBounds(100,680,600,20);
-        add(c7);
-        
-        b1.setBounds(250,720,100,30);
+        b1.setBounds(470,640,100,30);
         add(b1);
         
-        b2.setBounds(420,720,100,30);
+        b2.setBounds(570,640,100,30);
         add(b2);
         
-        //Seeting windows size and colour
-        getContentPane().setBackground(Color.WHITE); 
-        setSize(850,850);
-        setLocation(500,120);
+        
+        getContentPane().setBackground(Color.WHITE);
+        
+        setSize(850,950);
+        setLocation(100,0);
         setVisible(true);
         
-        //Action listener for buttons
         b1.addActionListener(this);
         b2.addActionListener(this);
         
-	}
-	
-	public void actionPerformed(ActionEvent ae) {
-		String a=null;
-		if(r1.isSelected())
-			a="Savings Account";
-		else if(r2.isSelected())
-			a="Fixed Deposit Account";
-		else if(r3.isSelected())
-			a="Current Account";
-		else if(r4.isSelected())
-			a="Recurring Deposit Account";
-		
-		//random number for card no
-		Random ran=new Random();
-		long first7=(ran.nextLong()%90000000L)+5040936000000000L;
-		long first8=Math.abs(first7);
-		
-		//random number for pin
-		long first3=(ran.nextLong()%9000L)+1000L;
-		long first4=Math.abs(first3);
-		
-		String b="";
-		if(c1.isSelected())
-			b=b+" ATM Card";
-		if(c2.isSelected())
-			b=b+" Internet Banking";
-		if(c3.isSelected())
-			b=b+" Mobile Banking";
-		if(c4.isSelected())
-			b=b+" EMAIL Alerts";
-		if(c5.isSelected())
-			b=b+" Cheque Book";
-		if(c6.isSelected())
-			b=b+" E-Statement";
-		
-		String c=t1.getText();
-		
-		try {
-			if(ae.getSource()==b1) {
-				if(b.equals("")) 
-					JOptionPane.showMessageDialog(null, "Fill all the required Fileds");
-					
-			else {
-				Conn c1= new Conn();
-				String q1="insert into signup3 values('"+a+"','"+first8+"','"+first4+"','"+b+"','"+c+"')";
-				String q2="insert into login values('"+first8+"','"+first4+"')";
-				c1.s.executeUpdate(q1);
-				c1.s.executeUpdate(q2);
-				JOptionPane.showMessageDialog(null, "Card Number: " + first8 + "\n Pin: "+ first4);
-				
-				new Deposit().setVisible(true);
-				setVisible(false);}
-			}
-		 	else if(ae.getSource()==b2)
-				 System.exit(0);
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-			public static void main (String[] args) {
-=======
-			public void main (String[] args) {
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-=======
-			public void main (String[] args) {
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-				new Signup3().setVisible(true);
-				
-			}
-		
-	}
-
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        String atype = null;
+        if(r1.isSelected()){ 
+            atype = "Saving Account";
+        }
+        else if(r2.isSelected()){ 
+            atype = "Fixed Deposit Account";
+        }
+        else if(r3.isSelected()){ 
+            atype = "Current Account";
+        }else if(r4.isSelected()){ 
+            atype = "Recurring Deposit Account";
+        }
+        
+        Random ran = new Random();
+        long first7 = (ran.nextLong() % 90000000L) + 5040936000000000L;
+        String cardno = "" + Math.abs(first7);
+        
+        long first3 = (ran.nextLong() % 9000L) + 1000L;
+        String pin = "" + Math.abs(first3);
+        
+        String facility = "";
+        if(c1.isSelected()){ 
+            facility = facility + " ATM Card";
+        }
+        if(c2.isSelected()){ 
+            facility = facility + " Internet Banking";
+        }
+        if(c3.isSelected()){ 
+            facility = facility + " Mobile Banking";
+        }
+        if(c4.isSelected()){ 
+            facility = facility + " EMAIL Alerts";
+        }
+        if(c5.isSelected()){ 
+            facility = facility + " Cheque Book";
+        }
+        if(c6.isSelected()){ 
+            facility = facility + " E-Statement";
+        }
+        
+        try{
+            if(ae.getSource()==b1){
+                
+                if(atype.equals("")){
+                    JOptionPane.showMessageDialog(null, "Fill all the required fields");
+                }else{
+                    Conn c1 = new Conn();
+                    String q1 = "insert into signup3 values('"+formno+"','"+atype+"','"+cardno+"','"+pin+"','"+facility+"')";  
+                    String q2 = "insert into login values('"+formno+"','"+cardno+"','"+pin+"')";
+                    c1.s.executeUpdate(q1);
+                    c1.s.executeUpdate(q2);
+                    JOptionPane.showMessageDialog(null, "Card Number: " + cardno + "\n Pin:"+ pin);
+                    
+                    new Deposit(pin).setVisible(true);
+                    setVisible(false);
+                }
+            
+            }else if(ae.getSource()==b2){
+                System.exit(0);
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    public static void main(String[] args){
+        new Signup3("").setVisible(true);
+    }
+    
+}

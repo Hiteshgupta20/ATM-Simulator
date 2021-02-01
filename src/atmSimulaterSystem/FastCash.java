@@ -4,33 +4,29 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class FastCash extends JFrame implements ActionListener{
 	JLabel l1,l2;
-	JButton b1,b2,b3,b4,b5,b6,b7;
+	JButton b1,b2,b3,b4,b5,b6,b7,b8;
 	JTextField t1; 
+	String pin;
 
-	FastCash(){
-		setFont(new Font("System",Font.BOLD,22));
-		Font f=getFont();
-		FontMetrics fm=getFontMetrics(f);
-		int x=fm.stringWidth("Fast Cash");
-		int y=fm.stringWidth(" ");
-		int z=getWidth()-(4*x);
-		int w=z/y;
-		String pad="";
-		pad=String.format("%"+w+"s", pad);
-		setTitle(pad+"Fast Cash");
+	FastCash(String pin){
+		
+		this.pin=pin;
+		setTitle("Fast Cash");
+		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("ASimulatorSystem/icons/atm.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l3 = new JLabel(i3);
+        l3.setBounds(0, 0, 960, 1080);
+        add(l3);
+
 		
 		l1=new JLabel("Select Withdrawl Amount");
 		l1.setFont(new Font("System",Font.BOLD,38));
-		
-		l2=new JLabel("Enter Pin");
-		l2.setFont(new Font("System",Font.BOLD,13));
-		
-		t1=new JTextField();
-		t1.setFont(new Font("Raleway",Font.BOLD,13));
-		
+				
 		b1 = new JButton("100");
         b1.setFont(new Font("System" ,Font.BOLD,18));
         b1.setBackground(Color.BLACK);
@@ -72,12 +68,6 @@ public class FastCash extends JFrame implements ActionListener{
         
         l1.setBounds(40,100, 60, 40);
         add(l1);
-        
-        l2.setBounds(640, 10, 60, 40);
-        add(l2);
-        
-        t1.setBounds(710,10,60,40);
-        add(t1);
 
         b1.setBounds(40, 250, 300, 60);
         add(b1);
@@ -114,114 +104,46 @@ public class FastCash extends JFrame implements ActionListener{
         
         getContentPane().setBackground(Color.WHITE);
         setSize(800,800);
-        setLocation(500,0);
+        setLocation(100,0);
         setVisible(true);
 		
 	}
-	public void actionPerformed(ActionEvent ae) {
-		try {
-			String a= t1.getText();
-			double balance =0;
-			
-			if(ae.getSource()==b1) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=100;
-					String q1="insert into bank values('"+pin+"',null,100,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+100+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);
-			}
-			else if(ae.getSource()==b2) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=500;
-					String q1="insert into bank values('"+pin+"',null,500,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+500+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);
-		}
-			else if(ae.getSource()==b3) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=1000;
-					String q1="insert into bank values('"+pin+"',null,1000,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+1000+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);
+	 public void actionPerformed(ActionEvent ae) {
+	        try {
+	            String amount = ((JButton)ae.getSource()).getText().substring(3); //k
+	            Conn c = new Conn();
+	            ResultSet rs = c.s.executeQuery("select * from bank where pin = '"+pin+"'");
+	            int balance = 0;
+	            while (rs.next()) {
+	                if (rs.getString("mode").equals("Deposit")) {
+	                    balance += Integer.parseInt(rs.getString("amount"));
+	                } else {
+	                    balance -= Integer.parseInt(rs.getString("amount"));
+	                }
+	            } String num = "17";
+	            if (ae.getSource() != b7 && balance < Integer.parseInt(amount)) {
+	                JOptionPane.showMessageDialog(null, "Insuffient Balance");
+	                return;
+	            }
+
+	            if (ae.getSource() == b7) {
+	                this.setVisible(false);
+	                new Transactions(pin).setVisible(true);
+	            }else{
+	                Date date = new Date();
+	                c.s.executeUpdate("insert into bank values('"+pin+"', '"+date+"', 'Withdrawl', '"+amount+"')");
+	                JOptionPane.showMessageDialog(null, "Rs. "+amount+" Debited Successfully");
+	                    
+	                setVisible(false);
+	                new Transactions(pin).setVisible(true);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	    }
+
+	    public static void main(String[] args) {
+	        new FastCash("").setVisible(true);
+	    }
 	}
-			else if(ae.getSource()==b4) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=2000;
-					String q1="insert into bank values('"+pin+"',null,2000,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+2000+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);
-}
-			else if(ae.getSource()==b5) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=5000;
-					String q1="insert into bank values('"+pin+"',null,5000,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+5000+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);
-			}
-			else if(ae.getSource()==b6) {
-				Conn c1= new Conn();
-				ResultSet rs= c1.s.executeQuery("select * from bank where pin = '"+a+"' ");
-				
-				if(rs.next()) {
-					String pin = rs.getString("pin");
-					balance= rs.getDouble("balance");
-					balance-=10000;
-					String q1="insert into bank values('"+pin+"',null,10000,'"+balance+"')";
-					c1.s.executeUpdate(q1);
-					}
-				JOptionPane.showMessageDialog(null, "Rs."+10000+" Debited Succesfully");
-				new Transactions().setVisible(true);
-				setVisible(false);}
-			
-			else if(ae.getSource()==b7) {
-				System.exit(0);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public static void main(String[] args) {
-		new FastCash().setVisible(true);
-		
-	}}
-			

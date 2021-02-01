@@ -1,74 +1,62 @@
 package atmSimulaterSystem;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
-import java.util.*;
 
-public class Transactions extends JFrame implements ActionListener {
-	JLabel l1;
-	JButton b1,b2,b3,b4,b5,b6,b7;
-	
-	
-	Transactions() {
-		
-		//Move Title to Center
-		
-		setFont(new Font("System",Font.BOLD,22));
-		Font f=getFont();
-		FontMetrics fm=getFontMetrics(f);
-		int x=fm.stringWidth("Transactions");
-		int y=fm.stringWidth(" ");
-		int z=getWidth()-x;
-		int w=z/y;
-		String pad="";
-		pad=String.format("%"+w+"s", pad);
-		setTitle(pad+"Transactions");
-		
-		//Labels
-		l1 = new JLabel("Please Select your Trasactions");
-		l1.setForeground(Color.WHITE);
-		l1.setFont(new Font("System", Font.BOLD,16));
-		
-		//Buttons
-		b1=new JButton("DEPOSIT");
-		b2=new JButton("CASH WITHDRWAL");
-		b3=new JButton("FAST CASH");
-		b4=new JButton("MINI STATEMENT");
-		b5=new JButton("PIN CHANGE");
-		b6=new JButton("BALANCE ENQUIRY");
-		b7=new JButton("EXIT");
-		
-		setLayout(null);
-		
-		//setting Layouts
-		l1.setBounds(235,400,700,35);
-        add(l1);
+public class Transactions extends JFrame implements ActionListener{
+
+    JLabel l1;
+    JButton b1,b2,b3,b4,b5,b6,b7;
+    String pin;
+    Transactions(String pin){
+        this.pin = pin;
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("atmSimulaterSystem/icons/atm.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(1000, 1180, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l2 = new JLabel(i3);
+        l2.setBounds(0, 0, 960, 1080);
+        add(l2);
+        
+        l1 = new JLabel("Please Select Your Transaction");
+        l1.setForeground(Color.WHITE);
+        l1.setFont(new Font("System", Font.BOLD, 16));
+        
+       
+        b1 = new JButton("DEPOSIT");
+        b2 = new JButton("CASH WITHDRAWL");
+        b3 = new JButton("FAST CASH");
+        b4 = new JButton("MINI STATEMENT");
+        b5 = new JButton("PIN CHANGE");
+        b6 = new JButton("BALANCE ENQUIRY");
+        b7 = new JButton("EXIT");
+        
+        setLayout(null);
+        
+        l1.setBounds(235,400,700,35);
+        l2.add(l1);
         
         b1.setBounds(170,499,150,35);
-        add(b1);
+        l2.add(b1);
         
         b2.setBounds(390,499,150,35);
-        add(b2);
+        l2.add(b2);
         
         b3.setBounds(170,543,150,35);
-        add(b3);
+        l2.add(b3);
         
         b4.setBounds(390,543,150,35);
-        add(b4);
+        l2.add(b4);
         
         b5.setBounds(170,588,150,35);
-        add(b5);
+        l2.add(b5);
         
         b6.setBounds(390,588,150,35);
-        add(b6);
+        l2.add(b6);
         
         b7.setBounds(390,633,150,35);
-        add(b7);
+        l2.add(b7);
         
-        //Action listnere for buttons
         
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -78,69 +66,40 @@ public class Transactions extends JFrame implements ActionListener {
         b6.addActionListener(this);
         b7.addActionListener(this);
         
-        //Window size and Color
-        getContentPane().setBackground(Color.WHITE);
-        setSize(850,850);
-        setLocation(500,120);
+        
+        setSize(960,1080);
+        setLocation(100,0);
+        setUndecorated(true);
         setVisible(true);
-	}
-	 public void actionPerformed(ActionEvent ae) {
-		 if(ae.getSource()==b1) {
-			 new Deposit().setVisible(true);
-			 setVisible(false);
-		 }
-		 else if(ae.getSource()==b2) {
-			 new Withdrawl().setVisible(true);
-			 setVisible(false);
-		 }
-		 else if(ae.getSource()==b3) {
-			 new FastCash().setVisible(true);
-			 setVisible(false);
-		 }
-		 else if(ae.getSource()==b4) {
-			 new Login().setVisible(true);
-			 setVisible(false);
-		 }
-		 else if(ae.getSource()==b5) {
-			 new Pin().setVisible(true);
-			 setVisible(false);
-		 }
-		 else if(ae.getSource()==b6) {
-			 String pin = JOptionPane.showInputDialog("Enter Your Pin");
-			 Conn c1= new Conn();
-			 
-			 try {
-				 ResultSet rs=c1.s.executeQuery(" select balance from bank order by pin ='"+pin+"' desc limit 1");
-				 if(rs.next()) {
-					 String balance =rs.getString("balance");
-					 JOptionPane.showMessageDialog(null, "Your Account Balance is " +balance);
-					 }
-				 }
-			 catch (Exception e) {
-				 e.printStackTrace();
-			 }
-	
-			}
-		 else if(ae.getSource()==b7)
-			 System.exit(0);
-		 }
-	 public void main(String[] args) {
-		 new Transactions().setVisible(true);
-	 }
-	
-=======
-=======
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-
-public class Transactions {
-
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-<<<<<<< HEAD
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-=======
->>>>>>> 46f45f12dc7f97d0c85fa2f133d4db5a01c0b914
-
+        
+        
+        
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==b1){ 
+            setVisible(false);
+            new Deposit(pin).setVisible(true);
+        }else if(ae.getSource()==b2){ 
+            setVisible(false);
+            new Withdrawl(pin).setVisible(true);
+        }else if(ae.getSource()==b3){ 
+            setVisible(false);
+            new FastCash(pin).setVisible(true);
+        }else if(ae.getSource()==b4){ 
+            new MiniStatement(pin).setVisible(true);
+        }else if(ae.getSource()==b5){ 
+            setVisible(false);
+            new Pin(pin).setVisible(true);
+        }else if(ae.getSource()==b6){ 
+            this.setVisible(false);
+            new BalanceEnquiry(pin).setVisible(true);
+        }else if(ae.getSource()==b7){ 
+            System.exit(0);
+        }
+    }
+    
+    public static void main(String[] args){
+        new Transactions("").setVisible(true);
+    }
 }
