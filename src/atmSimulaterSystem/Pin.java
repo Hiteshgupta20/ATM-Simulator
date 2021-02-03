@@ -8,8 +8,9 @@ import java.sql.*;
 public class Pin extends JFrame implements ActionListener{
     
     JPasswordField t1,t2;
+  
     JButton b1,b2;                               
-    JLabel l1,l2,l3;
+    JLabel l1,l2,l3,label;
     String pin;
     Pin(String pin){
         this.pin = pin;
@@ -75,23 +76,25 @@ public class Pin extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent ae){
-        try{        
-            String npin = t1.getText();
-            String rpin = t2.getText();
+        try{      
+        	 String npin = t1.getText();
+           // npin =""+Integer.parseInt(t1.getText());
+            String rpin =(t2.getText());
             
             if(!npin.equals(rpin)){
                 JOptionPane.showMessageDialog(null, "Entered PIN does not match");
                 return;
             }
             
+            
             if(ae.getSource()==b1){
                 if (t1.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Enter New PIN");
                 }
-                if (t2.getText().equals("")){
+                else if (t2.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Re-Enter new PIN");
                 }
-                
+                else {
                 Conn c1 = new Conn();
                 String q1 = "update bank set pin = '"+rpin+"' where pin = '"+pin+"' ";
                 String q2 = "update login set pin = '"+rpin+"' where pin = '"+pin+"' ";
@@ -103,7 +106,7 @@ public class Pin extends JFrame implements ActionListener{
 
                 JOptionPane.showMessageDialog(null, "PIN changed successfully");
                 setVisible(false);
-                new Transactions(rpin).setVisible(true);
+                new Transactions(rpin).setVisible(true);}
             
             }else if(ae.getSource()==b2){
                 new Transactions(pin).setVisible(true);

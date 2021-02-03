@@ -135,10 +135,10 @@ public class Signup extends JFrame implements ActionListener{
         
         dateChooser = new JDateChooser();
 	//dateChooser.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-	dateChooser.setForeground(new Color(105, 105, 105));
-	dateChooser.setBounds(137, 337, 200, 29);
-	add(dateChooser);
-        
+        dateChooser.setForeground(new Color(105, 105, 105));
+        dateChooser.setBounds(137, 337, 200, 29);
+        add(dateChooser);
+	
         setLayout(null);
         l1.setBounds(140,20,600,40);
         add(l1);

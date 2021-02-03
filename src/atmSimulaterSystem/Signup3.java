@@ -32,7 +32,7 @@ public class Signup3 extends JFrame implements ActionListener{
         l3 = new JLabel("Card Number:");
         l3.setFont(new Font("Raleway", Font.BOLD, 18));
         
-        l4 = new JLabel("XXXX-XXXX-XXXX-4184");
+        l4 = new JLabel("XXXX-XXXX-XXXX-XXXX");
         l4.setFont(new Font("Raleway", Font.BOLD, 18));
         
         l5 = new JLabel("(Your 16-digit Card number)");
