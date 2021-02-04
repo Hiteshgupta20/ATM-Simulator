@@ -4,13 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
+import java.util.regex.Pattern;
 
 public class Pin extends JFrame implements ActionListener{
     
     JPasswordField t1,t2;
-  
     JButton b1,b2;                               
-    JLabel l1,l2,l3,label;
+    JLabel l1,l2,l3,l5;
     String pin;
     Pin(String pin){
         this.pin = pin;
@@ -24,7 +24,7 @@ public class Pin extends JFrame implements ActionListener{
         l1 = new JLabel("CHANGE YOUR PIN");
         l1.setFont(new Font("System", Font.BOLD, 16));
         l1.setForeground(Color.WHITE);
-        
+             
         l2 = new JLabel("New PIN:");
         l2.setFont(new Font("System", Font.BOLD, 16));
         l2.setForeground(Color.WHITE);
@@ -74,27 +74,24 @@ public class Pin extends JFrame implements ActionListener{
         setVisible(true);
     
     }
-    
+   
     public void actionPerformed(ActionEvent ae){
+    	
+    	
         try{      
         	 String npin = t1.getText();
-           // npin =""+Integer.parseInt(t1.getText());
             String rpin =(t2.getText());
-            
-            if(!npin.equals(rpin)){
-                JOptionPane.showMessageDialog(null, "Entered PIN does not match");
-                return;
-            }
-            
-            
-            if(ae.getSource()==b1){
-                if (t1.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Enter New PIN");
-                }
-                else if (t2.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Re-Enter new PIN");
-                }
-                else {
+            if(ae.getSource()==b1) {
+              	if (npin.equals("") || !(Pattern.matches("^[0-9]+$",t1.getText()))) 
+                JOptionPane.showMessageDialog(null, "Only Numbers Allowed Please Re enter New Pin ");
+              
+            	else if (rpin.equals("") || !(Pattern.matches("^[0-9]+$",t2.getText()))) 
+               JOptionPane.showMessageDialog(null, " Only Numbers Allowed Please Re enter New Pin ");
+              	
+            	else if(!npin.equals(rpin))
+            	JOptionPane.showMessageDialog(null,"Pin doesn't match");
+              
+            	else {
                 Conn c1 = new Conn();
                 String q1 = "update bank set pin = '"+rpin+"' where pin = '"+pin+"' ";
                 String q2 = "update login set pin = '"+rpin+"' where pin = '"+pin+"' ";
@@ -112,7 +109,7 @@ public class Pin extends JFrame implements ActionListener{
                 new Transactions(pin).setVisible(true);
                 setVisible(false);
             }
-        }catch(Exception e){
+        }catch(Exception e) {
             e.printStackTrace();
         }
     }

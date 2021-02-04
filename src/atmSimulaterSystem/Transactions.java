@@ -72,12 +72,9 @@ public class Transactions extends JFrame implements ActionListener{
         setLocation(100,0);
         setUndecorated(true);
         setVisible(true);
-        
-        
-        
     }
-    
-    public void actionPerformed(ActionEvent ae){
+
+	public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==b1){ 
             setVisible(false);
             new Deposit(pin).setVisible(true);
