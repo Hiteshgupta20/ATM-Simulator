@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
+import java.util.regex.Pattern;
 
 public class Signup2 extends JFrame implements ActionListener{
     
@@ -219,8 +220,11 @@ public class Signup2 extends JFrame implements ActionListener{
        
         
         try{
-            if(t2.getText().equals(""))
-                JOptionPane.showMessageDialog(null, "Fill all the required fields");
+            if(aadhar.equals("") || !(Pattern.matches("^[0-9]+$",t2.getText())))
+                JOptionPane.showMessageDialog(null, "Aadhar Is Invalid");
+            
+            else if(t2.getText().equals(""))
+            	JOptionPane.showMessageDialog(null, "Fill all the Required fields");
                 
             else if(t1.getText().equals(""))
                     JOptionPane.showMessageDialog(null, "Fill all the required fields");
