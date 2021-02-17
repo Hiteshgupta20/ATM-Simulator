@@ -13,5 +13,6 @@ The “Bank Account Management System” project is a model Internet Banking Sit
 - Java Awt
 - MySQL
 - IDE: Eclipse
+### It is made with PROPER CODING and NO DRAG AND DROP
 
 
