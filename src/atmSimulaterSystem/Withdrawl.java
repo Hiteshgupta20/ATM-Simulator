@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Date;
+import java.util.regex.Pattern;
 import java.sql.*;
 
 public class Withdrawl extends JFrame implements ActionListener{
@@ -62,13 +63,17 @@ public class Withdrawl extends JFrame implements ActionListener{
     
     
     public void actionPerformed(ActionEvent ae){
-        try{        
+        try{        																
             String amount = t1.getText();
             Date date = new Date();
             if(ae.getSource()==b1){
-                if(t1.getText().equals("")){
-                    JOptionPane.showMessageDialog(null, "Please enter the Amount to you want to Withdraw");
-                }else{
+                if(amount.equals("") || !(Pattern.matches("^[0-9]+$",t1.getText())))
+                    JOptionPane.showMessageDialog(null, "Please Enter The Amount You Want To Deposit");
+                
+                else if(Integer.parseInt(t1.getText())>10000) 
+                	JOptionPane.showMessageDialog(null, "Maximum Withdrawl Limit is : 10000");
+                
+                else{
                     Conn c1 = new Conn();
                     
                     ResultSet rs = c1.s.executeQuery("select * from bank where pin = '"+pin+"'");

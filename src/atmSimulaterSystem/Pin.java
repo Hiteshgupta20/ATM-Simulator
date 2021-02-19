@@ -24,6 +24,10 @@ public class Pin extends JFrame implements ActionListener{
         l1 = new JLabel("CHANGE YOUR PIN");
         l1.setFont(new Font("System", Font.BOLD, 16));
         l1.setForeground(Color.WHITE);
+        
+        l5 = new JLabel("Enter Your 4 Digit Pin Only Numbers Allowed");
+        l5.setFont(new Font("System",Font.BOLD,14));
+        l5.setForeground(Color.WHITE);
              
         l2 = new JLabel("New PIN:");
         l2.setFont(new Font("System", Font.BOLD, 16));
@@ -50,16 +54,19 @@ public class Pin extends JFrame implements ActionListener{
         l1.setBounds(280,330,800,35);
         l4.add(l1);
         
-        l2.setBounds(180,390,150,35);
+        l5.setBounds(200,360,800,35);
+        l4.add(l5);       
+        
+        l2.setBounds(180,420,150,35);
         l4.add(l2);
         
-        l3.setBounds(180,440,200,35);
+        l3.setBounds(180,470,200,35);
         l4.add(l3);
         
-        t1.setBounds(350,390,180,25);
+        t1.setBounds(350,420,180,25);
         l4.add(t1);
         
-        t2.setBounds(350,440,180,25);
+        t2.setBounds(350,470,180,25);
         l4.add(t2);
         
         b1.setBounds(390,588,150,35);
