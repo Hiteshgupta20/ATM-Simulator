@@ -76,7 +76,8 @@ public class Pin extends JFrame implements ActionListener{
         l4.add(b2);
         
         setSize(960,1080);
-        setLocation(100,0);
+        setLocationRelativeTo(null);
+        setResizable(false);
         setUndecorated(true);
         setVisible(true);
     

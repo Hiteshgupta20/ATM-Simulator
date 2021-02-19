@@ -69,7 +69,8 @@ public class Transactions extends JFrame implements ActionListener{
         
         
         setSize(960,1080);
-        setLocation(100,0);
+        setLocationRelativeTo(null);
+        setResizable(false);
         setUndecorated(true);
         setVisible(true);
     }

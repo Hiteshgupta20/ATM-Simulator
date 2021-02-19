@@ -194,7 +194,8 @@ public class Signup2 extends JFrame implements ActionListener{
         getContentPane().setBackground(Color.WHITE);
         
         setSize(850,650);
-        setLocation(100,0);
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
     

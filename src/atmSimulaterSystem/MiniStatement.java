@@ -13,7 +13,8 @@ public class MiniStatement extends JFrame implements ActionListener{
         super("Mini Statement");
         getContentPane().setBackground(Color.WHITE);
         setSize(400,600);
-        setLocation(20,20);
+        setLocationRelativeTo(null);
+        setResizable(false);
         
         l1 = new JLabel();
         add(l1);
